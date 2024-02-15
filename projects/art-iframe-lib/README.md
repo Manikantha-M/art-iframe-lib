@@ -1,24 +1,18 @@
-# ArtIframeLib
+# Art Iframe Library
+
+Angular library that loads an external URL and facilitates inter-window communication between the Parent application and Guest application.
+
+## Import the module
+
+Import the module to your app.module.ts file using `import { ArtIframeLibModule } from 'art-iframe-lib'`,
+and add `ArtIframeLibModule` to the imports array.
+
+## Usage
+
+Add this selector and configure the input and output.
+
+`<lib-art-iframe [inputData]="inputData" [hostLanguage]="appLanguage" (outputData)="getGuestWindowData($event)" (guestLanguageChange)="guestAppLangChange($event)" [srcURL] = "srcURL"></lib-art-iframe>`
+
+## Package Info
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
-
-## Code scaffolding
-
-Run `ng generate component component-name --project art-iframe-lib` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project art-iframe-lib`.
-> Note: Don't forget to add `--project art-iframe-lib` or else it will be added to the default project in your `angular.json` file. 
-
-## Build
-
-Run `ng build art-iframe-lib` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build art-iframe-lib`, go to the dist folder `cd dist/art-iframe-lib` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test art-iframe-lib` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
