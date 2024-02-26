@@ -11,7 +11,7 @@ and add `ArtIframeLibModule` to the imports array.
 
 Add this selector and configure the input and output.
 
-`<lib-art-iframe [inputData]="inputData" [hostLanguage]="appLanguage" (outputData)="getGuestWindowData($event)" (guestLanguageChange)="guestAppLangChange($event)" [srcURL] = "srcURL"></lib-art-iframe>`
+`<lib-art-iframe [inputData]="inputData" [hostLanguage]="appLanguage" [token]="token" (outputData)="getGuestWindowData($event)" (guestLanguageChange)="guestAppLangChange($event)" [srcURL]="srcURL"></lib-art-iframe>`
 
 ## Package Info
 
