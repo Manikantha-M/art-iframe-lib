@@ -10,6 +10,7 @@ export class ArtIframeComponent implements OnInit {
 
   @Input() srcURL: string = "";
   @Input() hostLanguage: string = "en";
+  @Input() token: string = "";
   @Input() inputData: object = {};
   @Output() outputData: EventEmitter<any> = new EventEmitter<any>();
   @Output() guestLanguageChange: EventEmitter<any> = new EventEmitter<any>();
@@ -45,6 +46,9 @@ export class ArtIframeComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if(changes['hostLanguage'] && this.iframeRef) {
       this.iframeRef.contentWindow.postMessage(JSON.stringify({'eventType': 'langChange', 'langValue': changes['hostLanguage'].currentValue}), this.guestOrigin);
+    }
+    if(changes['token'] && this.iframeRef) {
+      this.iframeRef.contentWindow.postMessage(JSON.stringify({'eventType': 'tokenRefresh', 'token': changes['token'].currentValue}), this.guestOrigin);
     }
   }
 }
