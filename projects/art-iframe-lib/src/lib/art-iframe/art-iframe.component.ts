@@ -33,6 +33,8 @@ export class ArtIframeComponent implements OnInit {
       const parsedData = JSON.parse(event.data);
       if (parsedData['eventType'] == 'INPUT' && parsedData['onLoad']) {
         this.iframeRef.contentWindow.postMessage(JSON.stringify(this.inputData), this.guestOrigin);
+        this.iframeRef.contentWindow.postMessage(JSON.stringify({'eventType': 'langChange', 'langValue': this.hostLanguage}), this.guestOrigin);
+        this.iframeRef.contentWindow.postMessage(JSON.stringify({'eventType': 'tokenRefresh', 'token': this.token}), this.guestOrigin);
       }
       else if (parsedData["eventType"] == 'OUTPUT') {
         this.outputData.emit(parsedData);
