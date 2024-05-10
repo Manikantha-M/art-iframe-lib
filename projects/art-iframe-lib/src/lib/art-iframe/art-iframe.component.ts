@@ -23,16 +23,15 @@ export class ArtIframeComponent implements OnInit {
   ngOnInit(): void {
 
     this.hasInput = !!this.srcURL && !!this.hostLanguage && Object.values(this.inputData).length > 0;
-    // if (!this.hasInput) return;
+    if (!this.hasInput) return;
 
     this.iframeURL = this._ds.bypassSecurityTrustResourceUrl(this.srcURL);
     this.iframeRef = document.getElementById('iframeRef') as HTMLIFrameElement;
     this.guestOrigin = new URL(this.srcURL).origin;
 
     window.addEventListener('message', (event: any) => {
-      try {
+      if(typeof event.data == 'string'){
         const parsedData = JSON.parse(event.data);
-        if (parsedData && typeof parsedData === 'object') {
           if (parsedData['eventType'] == 'INPUT' && parsedData['onLoad']) {
             this.iframeRef.contentWindow.postMessage(JSON.stringify(this.inputData), this.guestOrigin);
             this.iframeRef.contentWindow.postMessage(JSON.stringify({'eventType': 'langChange', 'langValue': this.hostLanguage}), this.guestOrigin);
@@ -44,12 +43,6 @@ export class ArtIframeComponent implements OnInit {
           else if (parsedData["eventType"] == 'langChange') {
             this.guestLanguageChange.emit(parsedData);
           }
-        }
-        else {
-          console.error('Invalid JSON received:', event.data);
-        }
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
       }
     });
   }
